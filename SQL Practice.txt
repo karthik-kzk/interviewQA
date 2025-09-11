@@ -1,0 +1,34 @@
+SQL Practice
+
+1. **List all employees along with their department names.**
+
+2. **Find all projects with a budget greater than 1,000,000.**
+
+3. **Get the full names of employees working on any project.**
+
+4. **Find the number of employees in each department.**
+
+
+5. **List all projects and the number of employees assigned to each.**
+
+6. **Find employees who are not assigned to any project.**
+
+
+7. **Find the total salary cost per project (sum of salaries of all assigned employees).**
+
+
+8. **List departments with average employee salary greater than 75,000.**
+
+
+9. **Find the project(s) with the longest duration.**
+
+
+10. **Get the names of employees working on more than 2 projects.**
+
+11. For each project list title, budget, total salary
+
+12. For each department list departname and name of highest paid employee
+
+13. Eliminate duplicate rows from table employees_projects table. Create the test data
+
+14. An employee has a reporting Manager. Design the changes. Write a query to show the employee name and Manager Name
