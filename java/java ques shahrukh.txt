@@ -1,0 +1,45 @@
+user--user_id,first_name,last_name,email,
+order--order_id,user_id,product_id,quantity,date,status
+product--product_id,product_description,stock_quantity
+ 
+--print users email where product_id=1
+ 
+select distinct(u.email) from user u inner join order o on u.user_id = o.user_id where o.product_id=1 ;
+ 
+select concat(u.first_name,u.last_name), count(u.email) from user u 
+left join order o on u.user_id = o.user_id where o.user_id is not null;  //we need to count order_id here
+ 
+1,2
+2,0
+3,1
+ 
+1---today,yesterday---2
+2--null
+3--yesterday--1
+ 
+--find product id which never been ordered
+ 
+select p.product_id from product p where p.product_id not in(select product_id from order) //we can use left join here
+ 
+--------------------------------------------------------------------
+ 
+1.Introduction and project details
+2. SQL Questions -
+   2.1--find user's email which who have ordered where product_id=1 but if 1 user orders twice his email should appear once 
+   2.2--print user's name(or user_id) and count how many times they have ordered it should print 0 for the user who have not ordered 
+         1,2
+         2,0
+         3,1
+   2.3 find product id which never been ordered
+3. what is transaction in sql
+4. abstract class vs interface difference and why we need both and not either one of them
+5. what is bean and how to create it and use it and Inversion of control
+6. what if our bean are at different packages(component scan)
+7.How do we write controller and a post or get api in it(different annotations)
+8.sql vs NoSQL and performance 
+9. what is authentication and authorization and how it is done in oauth and jwt
+10.how to make first_name and last_name field unique combined
+11.what is polymorphism ,compile and runtime ,example code of overring and what if we don't use overriding annotation
+12.What is JPA and what is the use case of it
+13.Fetchtype eager vs lazy
+14.What are the ways to inject dependencies
