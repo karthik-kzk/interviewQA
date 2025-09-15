@@ -1,33 +1,64 @@
+covered concepts
+sum/count
+group by
+distinct
+having
+avg 
+sub query
+left join
+>=
+date diff/ time diff
+is not null
+is null
+
+
 SQL Practice
 
 1. **List all employees along with their department names.**
+select e.first_name,e.last_name,dep.name from employees as e left join departments as dep on dep.id=e.department_id;
 
 2. **Find all projects with a budget greater than 1,000,000.**
+SELECT * from projects where budget>1000000;
 
 3. **Get the full names of employees working on any project.**
+select e.first_name,ep.project_id from employees as e left join employees_projects as ep on e.id=ep.employee_id where project_id is NOT NULL
 
 4. **Find the number of employees in each department.**
-
+select count(e.id),d.name from employees as e left join departments as d on e.department_id=d.id GROUP BY d.name
 
 5. **List all projects and the number of employees assigned to each.**
+select p.title,count(e.id) from projects as p LEFT join employees_projects as ep on ep.project_id=p.id LEFT join employees as e on e.id=ep.employee_id GROUP by p.title
 
 6. **Find employees who are not assigned to any project.**
+select e.first_name,p.id from employees as e left join employees_projects as ep on ep.employee_id=e.id left join projects as p on p.id=ep.project_id WHERE p.id is null
 
 
 7. **Find the total salary cost per project (sum of salaries of all assigned employees).**
 
+select p.title,sum(e.salary)  from employees as e left join employees_projects as ep on ep.employee_id=e.id left join projects as p on p.id=ep.project_id where p.title is not null GROUP BY p.title 
 
 8. **List departments with average employee salary greater than 75,000.**
+select d.name,avg(e.salary) as avge from employees as e left join departments as d on d.id=e.department_id   GROUP BY d.name  having avge>20000
 
 
 9. **Find the project(s) with the longest duration.**
-
+select title,DATEDIFF(end_date,start_date) as duration from projects order by duration desc limit 1
 
 10. **Get the names of employees working on more than 2 projects.**
+select e.first_name,count(p.id) as cnt from employees as e left join employees_projects as ep on ep.employee_id=e.id LEFT join projects as p on p.id=ep.project_id group by e.first_name HAVING cnt>1
 
 11. For each project list title, budget, total salary
+select  p.title,p.budget,sum(e.salary) as salary  from projects as p left join employees_projects as ep on p.id= ep.project_id left join employees as e on e.id=ep.employee_id GROUP by p.title, p.budget
 
-12. For each department list departname and name of highest paid employee
+12. For each department list departname and name of highest paid employee.
+SELECT d.name AS department_name, e.first_name AS employee_name, e.salary
+FROM employees e
+JOIN departments d ON e.department_id = d.id
+WHERE e.salary = (
+    SELECT MAX(e2.salary)
+    FROM employees e2
+    WHERE e2.department_id = e.department_id
+);
 
 13. Eliminate duplicate rows from table employees_projects table. Create the test data
 
