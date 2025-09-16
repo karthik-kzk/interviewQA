@@ -5,11 +5,12 @@ distinct
 having
 avg 
 sub query
-left join
+join
 >=
 date diff/ time diff
 is not null
 is null
+order by
 
 
 SQL Practice
@@ -51,14 +52,7 @@ select e.first_name,count(p.id) as cnt from employees as e left join employees_p
 select  p.title,p.budget,sum(e.salary) as salary  from projects as p left join employees_projects as ep on p.id= ep.project_id left join employees as e on e.id=ep.employee_id GROUP by p.title, p.budget
 
 12. For each department list departname and name of highest paid employee.
-SELECT d.name AS department_name, e.first_name AS employee_name, e.salary
-FROM employees e
-JOIN departments d ON e.department_id = d.id
-WHERE e.salary = (
-    SELECT MAX(e2.salary)
-    FROM employees e2
-    WHERE e2.department_id = e.department_id
-);
+select d.name , (select Max(salary) from employees where department_id=d.id) as maxSalary from departments as d 
 
 13. Eliminate duplicate rows from table employees_projects table. Create the test data
 
